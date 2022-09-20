@@ -13,20 +13,20 @@ local function hordeChatFilter(self, event, ...)
     text, player_name, language_name,
     channel_name, player_name_2, special_flags,
     zone_channel_id, channel_index, channel_base_name,
-    language_id, line_id, guid,
+    message_language_id, line_id, guid,
     battlenet_sender_id, is_mobile, is_subtitle,
     hide_sender_in_letterbox, suppress_raid_icons = ...
 
     language_is_horde = False
     for i, v in ipairs(horde_languages) do
-        language_is_horde = language_is_horde or (v == language_id)
+        language_is_horde = language_is_horde or (v == message_language_id)
     end
 
     language_is_understood = False
     if not language_is_horde then
         for i = 1, GetNumLanguages() do
             name, spoken_language_id = GetLanguageByIndex(i)
-            language_is_understood = language_is_understood or (spoken_language_id == language_id)
+            language_is_understood = language_is_understood or (spoken_language_id == message_language_id)
         end
     end
 
@@ -38,7 +38,7 @@ local function hordeChatFilter(self, event, ...)
     return false, text, player_name, language_name,
     channel_name, player_name_2, special_flags,
     zone_channel_id, channel_index, channel_base_name,
-    language_id, line_id, guid,
+    message_language_id, line_id, guid,
     battlenet_sender_id, is_mobile, is_subtitle,
     hide_sender_in_letterbox, suppress_raid_icons
 end
