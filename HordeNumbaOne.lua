@@ -26,9 +26,7 @@ local function hordeChatFilter(self, event, ...)
     if not language_is_horde then
         for i = 1, GetNumLanguages() do
             name, spoken_language_id = GetLanguageByIndex(i)
-            if spoken_language_id == language_id then
-                language_is_understood = true
-            end
+            language_is_understood = language_is_understood or (spoken_language_id == language_id)
         end
     end
 
