@@ -1,0 +1,7 @@
+## Interface: 90207
+## Title: Horde Numba One
+## Notes: An addon that corrects the record
+## Author: Xorro of Sargeras
+## Version: 1.0.0
+
+HordeNumbaOne.lua
