@@ -11,12 +11,12 @@ local function hordeChatFilter(self, event, ...)
         285  -- Vulpera         Vulpera
     }
     local alliance_languages = {
-        2,  -- Darnassian
-        6,  -- Dwarvish
-        7,  -- Common
-        13, -- Gnomish
-        35, -- Draenei
-        37  -- Gnomish Binary
+        2,  -- Darnassian       Alliance Scum
+        6,  -- Dwarvish         Alliance Scum
+        7,  -- Common           Alliance Scum
+        13, -- Gnomish          Alliance Scum
+        35, -- Draenei          Alliance Scum
+        37  -- Gnomish Binary   Drunken Alliance Scum
     }
     text, player_name, language_name,
     channel_name, player_name_2, special_flags,
@@ -46,7 +46,11 @@ local function hordeChatFilter(self, event, ...)
     -- if the language is not horde and we don't understand it
     -- horde numba one
     if language_is_alliance or not (language_is_horde or language_is_understood) then
+        last_punctuation = string.match(text, "^.+(%p)$")
         text = "Horde Numba One"
+        if last_punctuation then
+            text = text..last_punctuation
+        end
     end
     return false, text, player_name, language_name,
     channel_name, player_name_2, special_flags,
