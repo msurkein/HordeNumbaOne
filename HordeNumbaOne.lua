@@ -10,6 +10,14 @@ local function hordeChatFilter(self, event, ...)
         181, -- Shalassian      Nightborne
         285  -- Vulpera         Vulpera
     }
+    local alliance_languages = {
+        2,  -- Darnassian
+        6,  -- Dwarvish
+        7,  -- Common
+        13, -- Gnomish
+        35, -- Draenei
+        37, -- Gnomish Binary
+    }
     text, player_name, language_name,
     channel_name, player_name_2, special_flags,
     zone_channel_id, channel_index, channel_base_name,
@@ -18,9 +26,15 @@ local function hordeChatFilter(self, event, ...)
     hide_sender_in_letterbox, suppress_raid_icons = ...
 
     language_is_horde = False
-    for i, v in ipairs(horde_languages) do
-        language_is_horde = language_is_horde or (v == message_language_id)
+    for i, horde_language_id in ipairs(horde_languages) do
+        language_is_horde = language_is_horde or (horde_language_id == message_language_id)
     end
+
+    language_is_alliance = False
+    for i, alliance_language_id in ipairs(alliance_languages) do
+        language_is_alliance = language_is_alliance or (alliance_language_id == message_language_id)
+    end
+
 
     language_is_understood = False
     if not language_is_horde then
@@ -32,7 +46,7 @@ local function hordeChatFilter(self, event, ...)
 
     -- if the language is not horde and we don't understand it
     -- horde numba one
-    if not (language_is_horde or language_is_understood) then
+    if language_is_alliance or not (language_is_horde or language_is_understood) then
         text = "Horde Numba One"
     end
     return false, text, player_name, language_name,
