@@ -16,7 +16,7 @@ local function hordeChatFilter(self, event, ...)
         7,  -- Common
         13, -- Gnomish
         35, -- Draenei
-        37, -- Gnomish Binary
+        37  -- Gnomish Binary
     }
     text, player_name, language_name,
     channel_name, player_name_2, special_flags,
@@ -34,7 +34,6 @@ local function hordeChatFilter(self, event, ...)
     for i, alliance_language_id in ipairs(alliance_languages) do
         language_is_alliance = language_is_alliance or (alliance_language_id == message_language_id)
     end
-
 
     language_is_understood = False
     if not language_is_horde then
