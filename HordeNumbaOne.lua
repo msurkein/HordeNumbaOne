@@ -1,4 +1,7 @@
 local addonName, addonData = ...
+local function log(name, value)
+    print(name.." = "..tostring(value))
+end
 local function hordeChatFilter(self, event, ...)
     local horde_languages = {
         1,   -- Orcish          Horde
@@ -35,7 +38,7 @@ local function hordeChatFilter(self, event, ...)
         language_is_alliance = language_is_alliance or (alliance_language_id == message_language_id)
     end
 
-    language_is_understood = False
+    language_is_understood = (message_language_id == 0) -- 0 is the language used in chat channels like /1, /2, etc.
     if not language_is_horde then
         for i = 1, GetNumLanguages() do
             name, spoken_language_id = GetLanguageByIndex(i)
@@ -46,11 +49,34 @@ local function hordeChatFilter(self, event, ...)
     -- if the language is not horde and we don't understand it
     -- horde numba one
     if language_is_alliance or not (language_is_horde or language_is_understood) then
-        last_punctuation = string.match(text, "^.+(%p)$")
+        last_punctuation = string.match(text, "^.+(%p+)$")
         text = "Horde Numba One"
         if last_punctuation then
             text = text..last_punctuation
         end
+    end
+    debug = false
+    if debug then
+        log("text", text)
+        log("player_name", player_name)
+        log("language_name", language_name)
+        log("channel_name", channel_name)
+        log("player_name_2", player_name_2)
+        log("special_flags", special_flags)
+        log("zone_channel_id", zone_channel_id)
+        log("channel_index", channel_index)
+        log("channel_base_name", channel_base_name)
+        log("message_language_id", message_language_id)
+        log("line_id", line_id)
+        log("guid", guid)
+        log("battlenet_sender_id", battlenet_sender_id)
+        log("is_mobile", is_mobile)
+        log("is_subtitle", is_subtitle)
+        log("hide_sender_in_letterbox", hide_sender_in_letterbox)
+        log("suppress_raid_icons", suppress_raid_icons)
+        log("language_is_horde", language_is_horde)
+        log("language_is_alliance", language_is_alliance)
+        log("language_is_understood", language_is_understood)
     end
     return false, text, player_name, language_name,
     channel_name, player_name_2, special_flags,
