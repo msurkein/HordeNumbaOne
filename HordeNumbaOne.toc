@@ -1,4 +1,4 @@
-## Interface: 90207
+## Interface: 100002
 ## Title: Horde Numba One
 ## Notes: An addon that tells it like it is
 ## Author: Dwayne-Duskwood <Computer>
